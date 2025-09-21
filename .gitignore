@@ -56,3 +56,4 @@ new-db-upload.py
 test-db-connection.js
 cleanup.sh
 env.example
+check-blog-post.js
