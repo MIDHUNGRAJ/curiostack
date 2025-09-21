@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL")
+}
+
+model BlogPost {
+  id         String     @id @default(cuid())
+  title      String
+  excerpt    String
+  content    String
+  category   String
+  image      String
+  date       String
+  readTime   String
+  author     String
+  tags       String     // JSON string of tags
+  featured   Boolean    @default(false)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  source     String?    // Optional field for AI-generated content
+  aiVersion  String?    // Optional field for AI version
+
+  @@map("blog_posts")
+}
