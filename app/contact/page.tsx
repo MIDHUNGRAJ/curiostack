@@ -61,7 +61,7 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600">hello@curiostack.com</p>
+                    <p className="text-gray-600">neurobyte.ml@gmail.com</p>
                     <p className="text-sm text-gray-500">We respond within 24 hours</p>
                   </div>
                 </div>
@@ -348,7 +348,7 @@ export default function ContactPage() {
               Join thousands of professionals who trust CurioStack for their content needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                          <a href="mailto:hello@curiostack.com" className="btn btn-secondary text-slate-700 bg-white hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
+                          <a href="mailto:neurobyte.ml@gmail.com" className="btn btn-secondary text-slate-700 bg-white hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg">
               Send Email
             </a>
             <a href="/newsletter" className="btn btn-outline text-white border-white hover:bg-white hover:text-slate-700 transition-all duration-300 transform hover:scale-105 shadow-lg">

@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import CategoryCards from '@/components/CategoryCards'
 import FeaturedArticles from '@/components/FeaturedArticles'
+import InContentBanner from '@/components/InContentBanner'
 import { ArrowRight, TrendingUp, Users, Zap, Globe, Search, BookOpen, Code, Star, Clock, Eye, BarChart3, Shield, Zap as Lightning } from 'lucide-react'
 import dynamic from 'next/dynamic'
 const SearchComponent = dynamic(() => import('@/components/SearchComponent'), { ssr: false })
@@ -69,7 +70,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Ads removed */}
+        {/* Top Homepage Banner */}
+        <section className="py-8 bg-white">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <InContentBanner 
+              bannerImage="/Media62365__1400х250-new.gif"
+              linkId="1xbet"
+              altText="1xBet Homepage Top Banner"
+              size="large"
+            />
+          </div>
+        </section>
 
         {/* Stats Section */}
         <section className="py-16 bg-white">
@@ -168,7 +179,16 @@ export default function Home() {
                 </div>
               </div>
             </div>
-            {/* Ads removed */}
+            
+            {/* Mid Homepage Banner */}
+            <div className="mt-16">
+              <InContentBanner 
+                bannerImage="/Media62437__800x250-2.gif"
+                linkId="1xbet"
+                altText="1xBet Homepage Mid Banner"
+                size="large"
+              />
+            </div>
           </div>
         </section>
 
@@ -344,7 +364,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Ads removed */}
+        {/* Bottom Homepage Banner */}
+        <section className="py-8 bg-slate-50">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <InContentBanner 
+              bannerImage="/Media62367__1920x250-new.gif"
+              linkId="1xbet"
+              altText="1xBet Homepage Bottom Banner"
+              size="large"
+            />
+          </div>
+        </section>
 
         {/* Back to Top Button */}
         <BackToTopButton />

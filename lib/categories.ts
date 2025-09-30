@@ -2,7 +2,6 @@ export const CATEGORIES = [
   'Technology',
   'AI', 
   'Business',
-  'Science',
   'Cybersecurity',
   'Data Science'
 ] as const
@@ -27,12 +26,6 @@ export const CATEGORY_CONFIG = {
     slug: 'business',
     description: 'Business insights and strategies',
     color: 'bg-green-500'
-  },
-  Science: {
-    name: 'Science',
-    slug: 'science',
-    description: 'Scientific discoveries and research',
-    color: 'bg-orange-500'
   },
   Cybersecurity: {
     name: 'Cybersecurity',

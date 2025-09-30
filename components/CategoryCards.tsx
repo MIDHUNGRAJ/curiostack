@@ -42,14 +42,6 @@ const categories = [
     trending: true
   },
   {
-    name: 'Science',
-    description: 'Scientific discoveries, research, and breakthrough innovations',
-    icon: Atom,
-    href: '/blog?category=Science',
-    color: 'from-orange-500 to-red-600',
-    stats: '950 articles'
-  },
-  {
     name: 'Cybersecurity',
     description: 'Security threats, compliance, and protection strategies',
     icon: Shield,
@@ -132,13 +124,13 @@ export default function CategoryCards() {
       
       {/* Articles Count */}
       <div className="text-center">
-        <p className="text-gray-500 text-sm">Showing 6 articles</p>
+        <p className="text-gray-500 text-sm">Showing 5 categories</p>
       </div>
       
       {/* Quick Stats */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
         <div className="bg-white rounded-lg p-4 text-center shadow-sm">
-          <div className="text-2xl font-bold text-slate-900">6</div>
+          <div className="text-2xl font-bold text-slate-900">5</div>
           <div className="text-sm text-slate-600">Categories</div>
         </div>
         <div className="bg-white rounded-lg p-4 text-center shadow-sm">

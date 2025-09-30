@@ -1,95 +1,78 @@
 'use client'
 
-import { useState } from 'react'
-import { Mail, Send, CheckCircle, AlertCircle, User, MessageSquare, FileText } from 'lucide-react'
+import React, { useState } from 'react'
+import { Mail, Send, CheckCircle, User, MessageSquare, FileText } from 'lucide-react'
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     subject: '',
-    message: '',
+    message: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [message, setMessage] = useState('')
-  const [errors, setErrors] = useState<{[key: string]: string}>({})
+  const [isSuccess, setIsSuccess] = useState(false)
 
-  const validateForm = () => {
-    const newErrors: {[key: string]: string} = {}
-    
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
-    }
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address'
-    }
-    
-    if (!formData.subject) {
-      newErrors.subject = 'Please select a subject'
-    }
-    
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required'
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = 'Message must be at least 10 characters long'
-    }
-    
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (!validateForm()) {
-      return
-    }
-    
     setIsSubmitting(true)
-    setMessage('')
+
+    const formDataToSend = new FormData()
+    formDataToSend.append('name', formData.name)
+    formDataToSend.append('email', formData.email)
+    formDataToSend.append('subject', formData.subject)
+    formDataToSend.append('message', formData.message)
 
     try {
-      // Here you would typically send the data to your backend
-      await new Promise(resolve => setTimeout(resolve, 1500))
-      
-      setMessage('Thank you                  We&apos;ll get back to you as soon as possible.')
-      setFormData({
-        name: '',
-        email: '',
-        subject: '',
-        message: '',
+      const response = await fetch('https://formspree.io/f/xeorgdqa', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
       })
-      setErrors({})
+
+      if (response.ok) {
+        setIsSuccess(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        throw new Error('Form submission failed')
+      }
     } catch (error) {
-      setMessage('Something went wrong. Please try again.')
+      console.error('Formspree error:', error)
+      alert('Failed to send message. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value,
-    })
-    
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: ''
-      })
-    }
-  }
-
-  const getInputClassName = (fieldName: string) => {
-    const baseClasses = "input-field transition-all duration-300"
-    const errorClasses = errors[fieldName] ? "border-red-500 focus:border-red-500 focus:ring-red-500" : "focus:ring-primary-500 focus:border-primary-500"
-    return `${baseClasses} ${errorClasses}`
+  if (isSuccess) {
+    return (
+      <div className="bg-card border border-border rounded-xl p-8 shadow-soft hover:shadow-medium transition-all duration-300">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-8 h-8 text-green-600" />
+          </div>
+          <h3 className="text-2xl font-semibold text-foreground mb-2">Message Sent!</h3>
+          <p className="text-muted-foreground mb-4">
+            Thank you for your message! We'll get back to you as soon as possible.
+          </p>
+          <button
+            onClick={() => setIsSuccess(false)}
+            className="btn btn-primary"
+          >
+            Send Another Message
+          </button>
+        </div>
+      </div>
+    )
   }
 
   return (
@@ -100,12 +83,12 @@ export default function ContactForm() {
         </div>
         <div>
           <h3 className="text-2xl font-display font-semibold text-foreground">
-            Contact Form
+            Get in Touch
           </h3>
-          <p className="text-sm text-muted-foreground">We&apos;ll respond within 24 hours</p>
+          <p className="text-sm text-muted-foreground">We'll respond within 24 hours</p>
         </div>
       </div>
-      
+
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="group">
@@ -120,17 +103,11 @@ export default function ContactForm() {
               value={formData.name}
               onChange={handleChange}
               required
-              className={getInputClassName('name')}
+              className="input-field transition-all duration-300 focus:ring-primary-500 focus:border-primary-500"
               placeholder="Your full name"
             />
-            {errors.name && (
-              <p className="text-red-500 text-sm mt-1 flex items-center">
-                <AlertCircle className="w-4 h-4 mr-1" />
-                {errors.name}
-              </p>
-            )}
           </div>
-          
+
           <div className="group">
             <label htmlFor="email" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors duration-200 flex items-center">
               <Mail className="w-4 h-4 mr-2" />
@@ -143,18 +120,12 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className={getInputClassName('email')}
+              className="input-field transition-all duration-300 focus:ring-primary-500 focus:border-primary-500"
               placeholder="your.email@company.com"
             />
-            {errors.email && (
-              <p className="text-red-500 text-sm mt-1 flex items-center">
-                <AlertCircle className="w-4 h-4 mr-1" />
-                {errors.email}
-              </p>
-            )}
           </div>
         </div>
-        
+
         <div className="group">
           <label htmlFor="subject" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors duration-200 flex items-center">
             <FileText className="w-4 h-4 mr-2" />
@@ -166,7 +137,7 @@ export default function ContactForm() {
             value={formData.subject}
             onChange={handleChange}
             required
-            className={getInputClassName('subject')}
+            className="input-field transition-all duration-300 focus:ring-primary-500 focus:border-primary-500"
           >
             <option value="">Select a subject</option>
             <option value="general">General Inquiry</option>
@@ -177,14 +148,8 @@ export default function ContactForm() {
             <option value="feedback">Feedback & Suggestions</option>
             <option value="other">Other</option>
           </select>
-          {errors.subject && (
-            <p className="text-red-500 text-sm mt-1 flex items-center">
-              <AlertCircle className="w-4 h-4 mr-1" />
-              {errors.subject}
-            </p>
-          )}
         </div>
-        
+
         <div className="group">
           <label htmlFor="message" className="block text-sm font-medium text-foreground mb-2 group-focus-within:text-primary transition-colors duration-200 flex items-center">
             <MessageSquare className="w-4 h-4 mr-2" />
@@ -197,20 +162,11 @@ export default function ContactForm() {
             onChange={handleChange}
             required
             rows={6}
-            className={`${getInputClassName('message')} resize-none`}
+            className="input-field transition-all duration-300 focus:ring-primary-500 focus:border-primary-500 resize-none"
             placeholder="Tell us how we can help you..."
           />
-          {errors.message && (
-            <p className="text-red-500 text-sm mt-1 flex items-center">
-              <AlertCircle className="w-4 h-4 mr-1" />
-              {errors.message}
-            </p>
-          )}
-          <div className="text-xs text-muted-foreground mt-1">
-            {formData.message.length}/1000 characters
-          </div>
         </div>
-        
+
         <div className="text-center">
           <button
             type="submit"
@@ -230,34 +186,17 @@ export default function ContactForm() {
             )}
           </button>
         </div>
-        
-        {message && (
-          <div className={`text-center p-4 rounded-lg border transition-all duration-300 ${
-            message.includes('Thank you') 
-              ? 'bg-green-100 dark:bg-green-900/20 text-green-800 dark:text-green-200 border-green-200 dark:border-green-800' 
-              : 'bg-red-100 dark:bg-red-900/20 text-red-800 dark:text-red-200 border-red-200 dark:border-red-800'
-          }`}>
-            <div className="flex items-center justify-center">
-              {message.includes('Thank you') ? (
-                <CheckCircle className="w-5 h-5 mr-2" />
-              ) : (
-                <AlertCircle className="w-5 h-5 mr-2" />
-              )}
-              {message}
-            </div>
-          </div>
-        )}
-        
+
         <div className="text-center pt-4 border-t border-border">
           <p className="text-muted-foreground text-sm">
             By submitting this form, you agree to our{' '}
             <a href="/privacy" className="text-primary hover:text-primary/80 underline transition-colors">
               privacy policy
             </a>
-            We&apos;ll be in touch soon!ur information with third parties.
+            . We'll be in touch soon!
           </p>
         </div>
       </form>
     </div>
   )
-} 
+}

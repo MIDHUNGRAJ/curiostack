@@ -84,7 +84,6 @@ const nextConfig = {
             key: 'Referrer-Policy',
             value: 'origin-when-cross-origin',
           },
-          // X-XSS-Protection is obsolete in modern browsers
           {
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains',
@@ -97,13 +96,11 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              // Avoid unsafe-eval; keep inline temporarily until transitioned to nonces
-              "script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com https://www.google-analytics.com",
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: https: https://images.unsplash.com https://via.placeholder.com",
-              "connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com",
-              "frame-src https://pagead2.googlesyndication.com",
+              "img-src 'self' blob: data: https:",
+              "connect-src 'self' https://*.google-analytics.com https://formspree.io",
               "object-src 'none'",
               "base-uri 'self'",
               "form-action 'self'",
@@ -129,21 +126,6 @@ const nextConfig = {
           },
         ],
       },
-      {
-        source: '/:path*',
-        headers: [
-          {
-            key: 'Content-Security-Policy',
-            value: `
-              default-src 'self';
-              script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googletagmanager.com https://*.google-analytics.com;
-              style-src 'self' 'unsafe-inline';
-              img-src 'self' blob: data: https:;
-              connect-src 'self' https://*.google-analytics.com;
-            `.replace(/\s{2,}/g, ' ').trim()
-          }
-        ]
-      }
     ]
   },
 }

@@ -6,8 +6,10 @@ import Footer from '@/components/Footer'
 import { notFound } from 'next/navigation'
 import { prisma } from '@/lib/db'
 import MarkdownRenderer from '@/components/MarkdownRenderer'
+import MarkdownWithAds from '@/components/MarkdownWithAds'
 import RelatedTopics from '@/components/RelatedTopics'
 import LatestPostsSection from '@/components/LatestPostsSection'
+import InContentBanner from '@/components/InContentBanner'
 
 import { TrendingUp, Flame, Newspaper, Target, BookOpen, Clock, Calendar, ArrowLeft, Share2, User, Tag } from 'lucide-react'
 
@@ -151,13 +153,30 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
                   </div>
                 )}
 
-                {/* Article Content */}
+                {/* In-Content Banner #1 - After header/image */}
+                <InContentBanner 
+                  bannerImage="/Media62437__800x250-2.gif"
+                  linkId="1xbet"
+                  altText="1xBet In-Content Banner"
+                  size="large"
+                />
+
+                {/* Article Content with Integrated Ads */}
                 <div className="max-w-4xl">
-                  <MarkdownRenderer 
+                  <MarkdownWithAds 
                     content={post.content}
                     className="text-slate-700 dark:text-slate-300 leading-relaxed"
+                    insertAds={true}
                   />
                 </div>
+
+                {/* In-Content Banner #2 - After content */}
+                <InContentBanner 
+                  bannerImage="/Media62437__800x250-2.gif"
+                  linkId="1xbet"
+                  altText="1xBet In-Content Banner"
+                  size="large"
+                />
 
                 {/* Article Footer */}
                 <footer className="mt-16 pt-8 border-t border-border/20">
@@ -225,6 +244,16 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </button>
             </form>
           </div>
+        </div>
+
+        {/* Banner Before Latest Posts */}
+        <div className="mt-16 mb-8">
+          <InContentBanner 
+            bannerImage="/Media62365__1400х250-new.gif"
+            linkId="1xbet"
+            altText="1xBet Latest Posts Banner"
+            size="large"
+          />
         </div>
 
         {/* Latest Posts Section */}

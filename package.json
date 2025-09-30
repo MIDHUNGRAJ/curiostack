@@ -28,6 +28,8 @@
     "test:db": "node test-db-connection.js"
   },
   "dependencies": {
+    "@emailjs/browser": "^4.4.1",
+    "@formspree/react": "^3.0.0",
     "@prisma/client": "^6.16.2",
     "@types/pg": "^8.15.5",
     "@types/react-syntax-highlighter": "^15.5.13",
