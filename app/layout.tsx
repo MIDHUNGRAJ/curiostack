@@ -19,6 +19,16 @@ export const metadata: Metadata = {
   keywords: ['technology', 'business', 'AI', 'startups', 'APIs'],
   authors: [{ name: 'CurioStack' }],
   robots: 'index, follow',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/icon.png', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
   openGraph: {
     title: 'CurioStack - AI-Powered Technology & Business Insights',
     description: 'CurioStack publishes high-quality, AI-generated, SEO-optimized content in technology and business.',
