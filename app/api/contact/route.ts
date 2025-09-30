@@ -12,20 +12,31 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Generate mailto link for reliable email sending
-    const mailto = `mailto:neurobyte.ml@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\n\n${message}`
-    )}`
-
-    return NextResponse.json({
-      success: true,
-      mailto: mailto,
-      message: 'Email client will open for sending'
+    // Send email using Formspree (works with any domain)
+    const response = await fetch('https://formspree.io/f/xeorgdqa', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        subject,
+        message,
+      })
     })
+
+    if (!response.ok) {
+      const errorText = await response.text()
+      console.error('Formspree error:', response.status, errorText)
+      throw new Error(`Formspree failed: ${response.status}`)
+    }
+
+    return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Contact form error:', error)
     return NextResponse.json(
-      { error: 'Failed to generate email' },
+      { error: 'Failed to send message. Please email us directly at neurobyte.ml@gmail.com' },
       { status: 500 }
     )
   }
