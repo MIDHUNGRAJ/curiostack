@@ -21,7 +21,6 @@ A production-ready news aggregation and AI-summarized content platform for AI, B
 
 ### **Production-Ready:**
 - **Database-driven** (handles thousands of posts)
-- **Ad integration** ready
 - **SEO optimized**
 - **Mobile responsive**
 - **Fast loading**
@@ -82,7 +81,7 @@ website/
 ✅ **Automated processing** - handles scraped data automatically  
 ✅ **AI categorization** - content is processed and organized  
 ✅ **Easy management** - monitor and adjust, minimal manual work  
-✅ **Production ready** - handles many users and ads  
+✅ **Production ready** - handles many users  
 ✅ **Scalable** - can manage thousands of articles   
 
 

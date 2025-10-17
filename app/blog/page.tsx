@@ -8,8 +8,6 @@ import CategoryFilter from '@/components/CategoryFilter'
 import BlogSidebar from '@/components/BlogSidebar'
 import { TrendingUp, Flame, Newspaper, Target, Search } from 'lucide-react'
 import SearchComponent from '@/components/SearchComponent'
-import TopBanner from '@/components/TopBanner'
-import BottomBanner from '@/components/BottomBanner'
 import { Suspense } from 'react'
 
 // Make the page dynamic for filtering
@@ -74,12 +72,6 @@ export default async function BlogPage({
           </div>
         </div>
 
-        {/* Top Banner Ad */}
-        <TopBanner 
-          bannerImage="/Media62365__1400х250-new.gif" 
-          linkId="1xbet"
-          altText="1xBet Top Banner Advertisement"
-        />
 
         {/* Main Content with Sidebar */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
@@ -104,7 +96,6 @@ export default async function BlogPage({
             {/* Filtered Blog Posts */}
             <FilteredBlogPosts posts={transformed} searchParams={searchParams} />
 
-            {/* Ads removed */}
 
             {/* Popular Tags - Optimized */}
             <div className="mt-12">
@@ -132,12 +123,6 @@ export default async function BlogPage({
           </div>
         </div>
         
-        {/* Bottom Banner Ad */}
-        <BottomBanner 
-          bannerImage="/Media62367__1920x250-new.gif" 
-          linkId="1xbet"
-          altText="1xBet Bottom Banner Advertisement"
-        />
       </div>
 
       <Footer />

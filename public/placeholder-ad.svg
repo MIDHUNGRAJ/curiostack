@@ -1,5 +1,0 @@
-<svg width="300" height="200" xmlns="http://www.w3.org/2000/svg">
-  <rect width="300" height="200" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2" rx="8"/>
-  <text x="150" y="90" font-family="Arial, sans-serif" font-size="14" fill="#64748b" text-anchor="middle">Ad Placeholder</text>
-  <text x="150" y="110" font-family="Arial, sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">300 × 200</text>
-</svg>

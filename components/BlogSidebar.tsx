@@ -3,7 +3,6 @@ import { prisma } from '@/lib/db'
 import Link from 'next/link'
 import Image from 'next/image'
 import { TrendingUp, Clock, Calendar, BookOpen } from 'lucide-react'
-import AffiliateLinks from './AffiliateLinks'
 
 // Helper function to validate image URLs
 const isValidImageUrl = (url: string | null | undefined): boolean => {
@@ -25,8 +24,6 @@ export default async function BlogSidebar() {
   return (
     <div className="space-y-6">
 
-      {/* Affiliate Links - Moved to top for better visibility */}
-      <AffiliateLinks />
 
       {/* Popular Posts */}
       <div className="bg-card rounded-xl p-6 border border-border/20 shadow-soft hover:shadow-medium transition-all duration-300">
@@ -67,14 +64,11 @@ export default async function BlogSidebar() {
                 </article>
               </Link>
               
-              {/* Ads removed */}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Affiliate Links - Middle position */}
-      <AffiliateLinks />
 
       {/* Newsletter Signup - Enhanced */}
       <div className="bg-card rounded-xl p-6 border border-border/20 shadow-soft hover:shadow-medium transition-all duration-300">
