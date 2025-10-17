@@ -2,6 +2,8 @@
 
 A production-ready news aggregation and AI-summarized content platform for AI, Business, Data-Science,Cybersecurity niches. Automatically processes scraped data, categorizes it with AI, and displays it.
 
+# CurioStack - Backend https://github.com/MIDHUNGRAJ/curiostack-backend
+
 <img width="1876" height="955" alt="image" src="https://github.com/user-attachments/assets/2556fc88-b3de-446d-babb-8b7b2f9d2e55" />
 
 ## 🚀 **Features**
